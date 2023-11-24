@@ -24,7 +24,7 @@ for i in range(START_PAGE, END_PAGE + 1):
     soup = BeautifulSoup(response.text, "html.parser")
     links = soup.select("h3.s-post-summary--content-title > a")
     for link in links:
-        with open("question-links.txt", "a") as f:
+        with open("data/question-links.txt", "a") as f:
             f.write(BASE_URL + link["href"] + "\n")
 
     question_num += len(links)
