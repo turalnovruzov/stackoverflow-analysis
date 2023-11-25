@@ -8,8 +8,10 @@ create_question_table = '''
 CREATE TABLE Question (
     id INTEGER PRIMARY KEY,
     title TEXT,
-    body TEXT,
+    body_with_tags TEXT,
+    body_without_tags TEXT,
     votes INTEGER,
+    url TEXT UNIQUE,
     views INTEGER,
     created_date DATETIME,
     modified_date DATETIME
@@ -19,8 +21,11 @@ CREATE TABLE Question (
 create_answer_table = '''
 CREATE TABLE Answer (
     id INTEGER PRIMARY KEY,
-    body TEXT,
+    body_with_tags TEXT,
+    body_without_tags TEXT,
     votes INTEGER,
+    url TEXT UNIQUE,
+    accepted BOOLEAN,
     created_date DATETIME,
     question_id INTEGER,
     FOREIGN KEY (question_id) REFERENCES Question(id)
@@ -30,7 +35,8 @@ CREATE TABLE Answer (
 create_tag_table = '''
 CREATE TABLE Tag (
     id INTEGER PRIMARY KEY,
-    name TEXT
+    name TEXT UNIQUE,
+    url TEXT UNIQUE
 );
 '''
 

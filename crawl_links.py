@@ -19,16 +19,16 @@ def get_questions_link(page):
 
 question_num = 0
 
-for i in range(START_PAGE, END_PAGE + 1):
-    response = requests.get(get_questions_link(i))
-    soup = BeautifulSoup(response.text, "html.parser")
-    links = soup.select("h3.s-post-summary--content-title > a")
-    for link in links:
-        with open("data/question-links.txt", "a") as f:
+with open("data/question-links.txt", "w") as f:
+    for i in range(START_PAGE, END_PAGE + 1):
+        response = requests.get(get_questions_link(i))
+        soup = BeautifulSoup(response.text, "html.parser")
+        links = soup.select("h3.s-post-summary--content-title > a")
+        for link in links:
             f.write(BASE_URL + link["href"] + "\n")
 
-    question_num += len(links)
-    print("Page " + str(i) + " done.")
-    print("Questions in this page: " + str(len(links)))
+        question_num += len(links)
+        print("Page " + str(i) + " done.")
+        print("Questions in this page: " + str(len(links)))
 
 print("Total questions: " + str(question_num))
